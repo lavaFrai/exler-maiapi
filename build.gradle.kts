@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "1.8.21"
 
     id("maven-publish")
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 group = "ru.lavafrai.exler.mai"

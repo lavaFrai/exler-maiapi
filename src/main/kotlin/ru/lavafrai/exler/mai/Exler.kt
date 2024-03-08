@@ -5,7 +5,7 @@ import ru.lavafrai.exler.mai.types.*
 import kotlin.math.max
 import kotlin.math.min
 
-class Exler {
+object Exler {
     private var teachers = null as List<Teacher>?
 
 
