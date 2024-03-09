@@ -26,7 +26,7 @@ class TeachersList {
     @Test
     fun `Parse single teacher info`() {
         var teacher = Teacher(name="Сычёв Михаил Иванович", path="/education/prepods/04/sychyov/")
-        //teacher = exler.findTeacher("Ирина Александровна Данилина ")!!
+        teacher = exler.findTeacher("Ирина Александровна Данилина ")!!
         println(Json.encodeToString(exler.parseTeacherInfo(teacher)))
     }
 
