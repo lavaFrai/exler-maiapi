@@ -7,6 +7,6 @@ data class TeacherInfo (
     val name: String,
     val faculty: String?,
     val department: String?,
-    val photo: String?,
+    val photo: List<String>?,
     val reviews: List<TeacherReview>,
 )
