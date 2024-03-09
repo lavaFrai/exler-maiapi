@@ -1,3 +1,5 @@
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -23,8 +25,9 @@ class TeachersList {
 
     @Test
     fun `Parse single teacher info`() {
-        val teacher = Teacher(name="Сычёв Михаил Иванович", path="/education/prepods/04/sychyov/")
-        println(exler.parseTeacherInfo(teacher))
+        var teacher = Teacher(name="Сычёв Михаил Иванович", path="/education/prepods/04/sychyov/")
+        //teacher = exler.findTeacher("Ирина Александровна Данилина ")!!
+        println(Json.encodeToString(exler.parseTeacherInfo(teacher)))
     }
 
     /*
@@ -40,7 +43,7 @@ class TeachersList {
 
     @Test
     fun `Find teacher`() {
-        val teacher = exler.findTeacher("СЫЧЕВ МИХАИЛ ИВАНОВИЧ ")
+        var teacher = exler.findTeacher("СЫЧЕВ МИХАИЛ ИВАНОВИЧ ")
         //Assertions.assertNotNull(teacher)
 
         println(teacher)

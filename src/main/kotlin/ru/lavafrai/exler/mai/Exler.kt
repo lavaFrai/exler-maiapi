@@ -49,9 +49,11 @@ object Exler {
 
         val reviewsFinds =
             "<!--subscribeBegin-->([\\s\\S]+?)<!--subscribeEnd-->".toRegex().findAll(page.html()).toList()
+        val reviewsFinder = Regex("</small>(.+?)<!--subscribeEnd-->", setOf(RegexOption.IGNORE_CASE))
+
         val reviewsHtml = reviewsFinds.safeSubList(1, reviewsFinds.size).map { Jsoup.parse(it.groups[1]!!.value) }
 
-        val reviews = reviewsHtml.map {
+        val reviews = reviewsHtml.mapIndexed { index, it ->
             val small = it.select("small")
 
             TeacherReview(
@@ -62,7 +64,7 @@ object Exler {
                     ?.replace("&nbsp;", " "),
                 publishTime = "<b>Опубликовано:</b>(.+?)<br>".toRegex()
                     .find(small.html())?.groups?.get(1)?.value?.trim()?.replace("&nbsp;", " "),
-                hypertext = "</small>(.+)".toRegex().find(it.html())?.groups?.get(1)?.value?.trim()
+                hypertext = reviewsFinder.findAll(page.select("body > center > table > tbody > tr > td:nth-child(1) > table:nth-child(2) > tbody > tr > td").html().replace("\n", "\\n")).toList()[index + 1]?.groups?.get(1)?.value?.trim()
                     ?.replace("&nbsp;", " ")
             )
         }
