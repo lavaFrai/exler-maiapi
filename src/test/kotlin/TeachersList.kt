@@ -5,7 +5,7 @@ import ru.lavafrai.exler.mai.Exler
 import ru.lavafrai.exler.mai.types.Teacher
 
 class TeachersList {
-    private val exler = Exler()
+    private val exler = Exler
 
     @Test
     fun `Parse faculties`() {
