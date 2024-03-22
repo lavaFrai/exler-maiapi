@@ -69,13 +69,21 @@ object Exler {
             )
         }
 
+        val photo = page
+            .select("body > center > table > tbody > tr > td:nth-child(1) > table:nth-child(2) > tbody > tr > td")
+            .select("img")
+            .toList()
+            .map { "https://mai-exler.ru" + teacher.path + it.parent().attr("href").ifEmpty { it.attr("src") }}
+            .filter { it != "https://mai-exler.ru" + teacher.path + "/education/prepods/Jeremy-Hillary-Boob-PhD_form-header.png" }
+
+
         return TeacherInfo(
             teacher.name,
             page.select(Selectors.TEACHER_FACULTY_SELECTOR).text().split("\\n").first().trim()
                 .removePrefix("Факультет:").trim().replace("&nbsp;", " "),
             page.select(Selectors.TEACHER_FACULTY_SELECTOR).text().split("\\n").getOrNull(1)?.trim()
                 ?.removePrefix("Кафедра: ")?.trim()?.replace("&nbsp;", " "),
-            page.select("body > center > table > tbody > tr > td:nth-child(1) > table:nth-child(2) > tbody > tr > td").select("img").toList().map { "https://mai-exler.ru" + teacher.path + it.attr("src") }.filter { it != "https://mai-exler.ru" + teacher.path + "/education/prepods/Jeremy-Hillary-Boob-PhD_form-header.png" },
+            photo,
             reviews,
         )
     }
