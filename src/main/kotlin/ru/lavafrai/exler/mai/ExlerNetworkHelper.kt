@@ -16,7 +16,6 @@ class ExlerNetworkHelper {
             return try {
                 Jsoup
                     .connect(url)
-                    .validateTLSCertificates(false)
                     .get()
             } catch (e: Exception) {
                 e.printStackTrace()
