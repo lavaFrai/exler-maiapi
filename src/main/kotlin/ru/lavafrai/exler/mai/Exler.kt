@@ -10,7 +10,7 @@ object Exler {
 
 
     fun parseFaculties(): List<Faculty> {
-        val page = ExlerNetworkHelper.getPage("/education/prepods/")
+        val page = ExlerNetworkHelper.getPage("/prepods/")
         return page.select(Selectors.FACULTIES_NAME_SELECTOR).map {
             Faculty(
                 it.text().removePrefix("«").removeSuffix("»"),
